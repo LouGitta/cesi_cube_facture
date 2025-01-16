@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FactureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,6 +51,21 @@ class Facture
 
     #[ORM\Column]
     private ?float $ht = null;
+
+    /**
+     * @var Collection<int, Ligne>
+     */
+    #[ORM\OneToMany(targetEntity: Ligne::class, mappedBy: 'facture')]
+    private Collection $lignes;
+
+    #[ORM\ManyToOne(inversedBy: 'factures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?client $client = null;
+
+    public function __construct()
+    {
+        $this->lignes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -202,6 +219,48 @@ class Facture
     public function setHt(float $ht): static
     {
         $this->ht = $ht;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ligne>
+     */
+    public function getLignes(): Collection
+    {
+        return $this->lignes;
+    }
+
+    public function addLigne(Ligne $ligne): static
+    {
+        if (!$this->lignes->contains($ligne)) {
+            $this->lignes->add($ligne);
+            $ligne->setFacture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigne(Ligne $ligne): static
+    {
+        if ($this->lignes->removeElement($ligne)) {
+            // set the owning side to null (unless already changed)
+            if ($ligne->getFacture() === $this) {
+                $ligne->setFacture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getClient(): ?client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?client $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }

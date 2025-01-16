@@ -34,6 +34,10 @@ class Ligne
     #[ORM\Column(nullable: true)]
     private ?int $facture_id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'lignes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?facture $facture = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +123,18 @@ class Ligne
     public function setFactureId(?int $facture_id): static
     {
         $this->facture_id = $facture_id;
+
+        return $this;
+    }
+
+    public function getFacture(): ?facture
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(?facture $facture): static
+    {
+        $this->facture = $facture;
 
         return $this;
     }
