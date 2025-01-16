@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\client;
+use App\Entity\Client;
 use App\Entity\Facture;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,8 +14,6 @@ class FactureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('exercice_id')
-            ->add('client_id')
             ->add('num')
             ->add('nb_jour')
             ->add('crea', null, [
@@ -33,8 +31,8 @@ class FactureType extends AbstractType
             ->add('ttc')
             ->add('ht')
             ->add('client', EntityType::class, [
-                'class' => client::class,
-                'choice_label' => 'id',
+                'class' => Client::class,
+                'choice_label' => 'name',
             ])
         ;
     }

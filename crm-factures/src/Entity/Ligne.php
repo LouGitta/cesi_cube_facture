@@ -13,14 +13,14 @@ class Ligne
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $info1 = null;
+    #[ORM\Column(length: 255)]
+    private ?string $info1 = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $info2 = null;
+    #[ORM\Column(length: 255)]
+    private ?string $info2 = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?float $info3 = null;
+    #[ORM\Column(length: 255)]
+    private ?string $info3 = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $prix = null;
@@ -31,9 +31,6 @@ class Ligne
     #[ORM\Column(nullable: true)]
     private ?float $total = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $facture_id = null;
-
     #[ORM\ManyToOne(inversedBy: 'lignes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?facture $facture = null;
@@ -43,36 +40,36 @@ class Ligne
         return $this->id;
     }
 
-    public function getInfo1(): ?float
+    public function getInfo1(): ?string
     {
         return $this->info1;
     }
 
-    public function setInfo1(?float $info1): static
+    public function setInfo1(?string $info1): static
     {
         $this->info1 = $info1;
 
         return $this;
     }
 
-    public function getInfo2(): ?float
+    public function getInfo2(): ?string
     {
         return $this->info2;
     }
 
-    public function setInfo2(?float $info2): static
+    public function setInfo2(?string $info2): static
     {
         $this->info2 = $info2;
 
         return $this;
     }
 
-    public function getInfo3(): ?float
+    public function getInfo3(): ?string
     {
         return $this->info3;
     }
 
-    public function setInfo3(?float $info3): static
+    public function setInfo3(?string $info3): static
     {
         $this->info3 = $info3;
 
@@ -111,18 +108,6 @@ class Ligne
     public function setTotal(?float $total): static
     {
         $this->total = $total;
-
-        return $this;
-    }
-
-    public function getFactureId(): ?int
-    {
-        return $this->facture_id;
-    }
-
-    public function setFactureId(?int $facture_id): static
-    {
-        $this->facture_id = $facture_id;
 
         return $this;
     }

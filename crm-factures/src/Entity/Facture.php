@@ -16,12 +16,6 @@ class Facture
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $exercice_id = null;
-
-    #[ORM\Column]
-    private ?int $client_id = null;
-
     #[ORM\Column(length: 10)]
     private ?string $num = null;
 
@@ -75,30 +69,6 @@ class Facture
     public function setId(int $id): static
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    public function getExerciceId(): ?int
-    {
-        return $this->exercice_id;
-    }
-
-    public function setExerciceId(int $exercice_id): static
-    {
-        $this->exercice_id = $exercice_id;
-
-        return $this;
-    }
-
-    public function getClientId(): ?int
-    {
-        return $this->client_id;
-    }
-
-    public function setClientId(int $client_id): static
-    {
-        $this->client_id = $client_id;
 
         return $this;
     }

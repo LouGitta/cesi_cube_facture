@@ -9,9 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Exercice_id</th>
-                <th>Client_id</th>
                 <th>Num</th>
+                <th>Client</th>
                 <th>Nb_jour</th>
                 <th>Crea</th>
                 <th>Name</th>
@@ -28,9 +27,8 @@
         {% for facture in factures %}
             <tr>
                 <td>{{ facture.id }}</td>
-                <td>{{ facture.exerciceId }}</td>
-                <td>{{ facture.clientId }}</td>
                 <td>{{ facture.num }}</td>
+                <td>{{ facture.client.name }}</td>
                 <td>{{ facture.nbJour }}</td>
                 <td>{{ facture.crea ? facture.crea|date('Y-m-d') : '' }}</td>
                 <td>{{ facture.name }}</td>

@@ -20,7 +20,6 @@ class LigneType extends AbstractType
             ->add('prix')
             ->add('quantite')
             ->add('total')
-            ->add('facture_id')
             ->add('facture', EntityType::class, [
                 'class' => facture::class,
                 'choice_label' => 'id',
