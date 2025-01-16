@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Facture index{% endblock %}
+
+{% block body %}
+    <h1>Facture index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Exercice_id</th>
+                <th>Client_id</th>
+                <th>Num</th>
+                <th>Nb_jour</th>
+                <th>Crea</th>
+                <th>Name</th>
+                <th>Info</th>
+                <th>Sent</th>
+                <th>Payed</th>
+                <th>Tva</th>
+                <th>Ttc</th>
+                <th>Ht</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for facture in factures %}
+            <tr>
+                <td>{{ facture.id }}</td>
+                <td>{{ facture.exerciceId }}</td>
+                <td>{{ facture.clientId }}</td>
+                <td>{{ facture.num }}</td>
+                <td>{{ facture.nbJour }}</td>
+                <td>{{ facture.crea ? facture.crea|date('Y-m-d') : '' }}</td>
+                <td>{{ facture.name }}</td>
+                <td>{{ facture.info }}</td>
+                <td>{{ facture.sent ? facture.sent|date('Y-m-d') : '' }}</td>
+                <td>{{ facture.payed ? facture.payed|date('Y-m-d') : '' }}</td>
+                <td>{{ facture.tva }}</td>
+                <td>{{ facture.ttc }}</td>
+                <td>{{ facture.ht }}</td>
+                <td>
+                    <a href="{{ path('app_facture_show', {'id': facture.id}) }}">show</a>
+                    <a href="{{ path('app_facture_edit', {'id': facture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_facture_new') }}">Create new</a>
+{% endblock %}
