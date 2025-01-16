@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\facture;
+use App\Entity\Facture;
 use App\Entity\Ligne;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -21,7 +21,7 @@ class LigneType extends AbstractType
             ->add('quantite')
             ->add('total')
             ->add('facture', EntityType::class, [
-                'class' => facture::class,
+                'class' => Facture::class,
                 'choice_label' => 'id',
             ])
         ;
