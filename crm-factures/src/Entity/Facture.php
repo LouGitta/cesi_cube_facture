@@ -49,7 +49,9 @@ class Facture
     /**
      * @var Collection<int, Ligne>
      */
-    #[ORM\OneToMany(targetEntity: Ligne::class, mappedBy: 'facture')]
+    /**
+     * @ORM\OneToMany(targetEntity=Ligne::class, mappedBy="facture", cascade={"persist"})
+     */
     private Collection $lignes;
 
     #[ORM\ManyToOne(inversedBy: 'factures')]
