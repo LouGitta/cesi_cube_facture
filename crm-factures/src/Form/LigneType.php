@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Facture;
+// use App\Entity\Facture;
 use App\Entity\Ligne;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LigneType extends AbstractType
 {
@@ -19,11 +19,11 @@ class LigneType extends AbstractType
             ->add('info3')
             ->add('prix')
             ->add('quantite')
-            ->add('total')
-            ->add('facture', EntityType::class, [
-                'class' => Facture::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('total')
+            // ->add('facture', EntityType::class, [
+            //     'class' => Facture::class,
+            //     'choice_label' => 'id',
+            // ])
         ;
     }
 
