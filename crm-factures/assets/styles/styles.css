@@ -3,3 +3,8 @@ footer {
     bottom: 0;
     width: 100%;
 }
+button:hover {
+    transform: scale(1.05);
+  }
+
+  
