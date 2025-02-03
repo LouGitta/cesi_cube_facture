@@ -1,20 +1,91 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    {{ form_row(form.num) }}
+    {{ form_row(form.nb_jour) }}
+    {{ form_row(form.crea) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.info) }}
+    {{ form_row(form.sent) }}
+    {{ form_row(form.payed) }}
+    {{ form_row(form.tva) }}
+    {{ form_row(form.ttc) }}
+    {{ form_row(form.ht) }}
+    {{ form_row(form.client) }}
     
+    <h3>Lignes</h3>
+    <table id="lignes-table" class="table">
+        <thead>
+            <tr>
+                <th>Info 1</th>
+                <th>Info 2</th>
+                <th>Info 3</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="lignes-collection" data-prototype="{{ form_widget(form.lignes.vars.prototype)|e }}">
+            {% for ligne in form.lignes %}
+                <tr>
+                    <td>{{ form_widget(ligne.info1) }}</td>
+                    <td>{{ form_widget(ligne.info2) }}</td>
+                    <td>{{ form_widget(ligne.info3) }}</td>
+                    <td>{{ form_widget(ligne.prix) }}</td>
+                    <td>{{ form_widget(ligne.quantite) }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-line">X</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
     <div class="form-group">
-        <button type="button" class="btn btn-success" id="add-line">Add Line</button>
+        <button type="button" class="btn btn-success" id="add-line">Ajouter une ligne</button>
     </div>
-<button class="btn">{{ button_label|default('Save') }}</button>
+
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
 
 <script>
-    document.getElementById('add-line').addEventListener('click', function() {
+    document.getElementById('add-line').addEventListener('click', function () {
         var collectionHolder = document.querySelector('.lignes-collection');
-        var prototype = collectionHolder.getAttribute('data-prototype');
-        var newForm = prototype.replace(/__name__/g, collectionHolder.children.length);
-        var newElem = document.createElement('div');
-        newElem.innerHTML = newForm;
-        collectionHolder.appendChild(newElem);
+        var prototype = collectionHolder.dataset.prototype;
+        var index = collectionHolder.children.length;
+        var newForm = prototype.replace(/__name__/g, index);
+    
+        // Créer un élément temporaire pour parser le HTML
+        var tempDiv = document.createElement('div');
+        tempDiv.innerHTML = newForm;
+    
+        // Extraire les champs
+        var inputs = tempDiv.querySelectorAll('input, select, textarea');
+        
+        // Créer une nouvelle ligne du tableau
+        var newRow = document.createElement('tr');
+    
+        inputs.forEach(input => {
+            var newCell = document.createElement('td');
+            newCell.appendChild(input);
+            newRow.appendChild(newCell);
+        });
+    
+        // Ajouter le bouton de suppression
+        var removeCell = document.createElement('td');
+        removeCell.innerHTML = '<button type="button" class="btn btn-danger remove-line">X</button>';
+        newRow.appendChild(removeCell);
+    
+        // Ajouter la ligne au tableau
+        collectionHolder.appendChild(newRow);
+    });
+    
+    // Suppression d'une ligne
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('remove-line')) {
+            event.target.closest('tr').remove();
+        }
     });
 </script>
-{{ form_end(form) }}
 
