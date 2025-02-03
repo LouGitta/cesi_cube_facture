@@ -12,12 +12,8 @@
                 <td>{{ facture.id }}</td>
             </tr>
             <tr>
-                <th>Exercice_id</th>
-                <td>{{ facture.exerciceId }}</td>
-            </tr>
-            <tr>
-                <th>Client_id</th>
-                <td>{{ facture.clientId }}</td>
+                <th>Client</th>
+                <td>{{ facture.client.name }}</td>
             </tr>
             <tr>
                 <th>Num</th>
@@ -62,9 +58,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_facture_index') }}">back to list</a>
+    <a href="{{ path('app_facture_index') }}"><i class="fa-solid fa-house"></i></a>
 
-    <a href="{{ path('app_facture_edit', {'id': facture.id}) }}">edit</a>
+    <a href="{{ path('app_facture_edit', {'id': facture.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
 
     {{ include('facture/_delete_form.html.twig') }}
 {% endblock %}
